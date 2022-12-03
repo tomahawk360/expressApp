@@ -1,5 +1,4 @@
 var fetch = require("node-fetch");
-var mongoose = require("mongoose");
 
 const auth = {
     "username": "alumnos@alumnos.org",
@@ -36,9 +35,12 @@ async function getData(token) {
 }
 
 async function filterData(data) {
-    let str_total = "";
+    let str_total = '';
+    const largo = Object.keys(data.TIMESTAMP).length;
 
-    for(let i = 0; i < 10; i++) {
+    for(let i = 0; i < largo; i++) {
+        str_total += '{';
+
         const str_timestamp = data.TIMESTAMP[i].value;
         const str_ws = data.WS[i].value;
         const str_wd = data.WD[i].value;
@@ -46,7 +48,14 @@ async function filterData(data) {
         const str_rh = data.RH[i].value;
         const str_bp = data.BP[i].value;
 
-        str_total += str_timestamp + " " + str_ws + " " + str_wd + " " + str_temp + " " + str_rh + " " + str_bp + "\n";
+        str_total += `"timestamp":"${str_timestamp}", `;
+        str_total += `"ws":${str_ws}, `;
+        str_total += `"wd":${str_wd}, `;
+        str_total += `"temp":${str_temp}, `;
+        str_total += `"rh":${str_rh}, `;
+        str_total += `"bp":${str_bp}`;
+
+        str_total += '}\n';
     }
 
     return str_total;

@@ -13,7 +13,7 @@ var downloadRouter = require('./routes/download');
 
 var app = express();
 
-//connection to db
+// connection to db
 const username = "pasajero";
 const password = "q1w2e3r4";
 const url = `mongodb://${username}:${password}@ac-eud9deb-shard-00-00.rvjlwzm.mongodb.net:27017,ac-eud9deb-shard-00-01.rvjlwzm.mongodb.net:27017,ac-eud9deb-shard-00-02.rvjlwzm.mongodb.net:27017/?ssl=true&replicaSet=atlas-ymfgu4-shard-0&authSource=admin&retryWrites=true&w=majority`;
@@ -25,6 +25,8 @@ db.on("error", console.error.bind(console, "connection error: "));
 db.once("open", () => {
     console.log("Connected successfully to db");
 });
+
+db.dropCollection("datas");
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

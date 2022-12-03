@@ -9,6 +9,8 @@ const DataSchema = new Schema({
     temp : { type : Number, default : -1 },
     rh : { type : Number, default : -1 },
     bp : { type : Number, default : -1 }
+},{
+    collection : 'datas'
 });
 
 const Data = mongoose.model("Data", DataSchema);
