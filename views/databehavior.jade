@@ -5,8 +5,21 @@ block content
     h2="Comportamiento de variables en el tiempo"
     hr
     form(action="/download", method="get") 
-        select(name="formato") 
+        select(id="formato", name="formato") 
             option(value="null") ---
             option(value="pdf") pdf
             option(value="csv") csv
-        input(type="submit", value="Submit")
+        input(id="descarga", type="submit", value="Descarga", disabled)
+
+    script.
+        const select = document.getElementById("formato");
+        const submit = document.getElementById("descarga");
+        
+        select.addEventListener("change", () => {
+            if(select.value == "pdf" || select.value == "csv") {
+                submit.disabled = false;
+            } else {
+                submit.disabled = true;
+            }
+        })
+

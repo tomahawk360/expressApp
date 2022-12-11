@@ -5,6 +5,8 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose');
 
+var loginRouter = require('./routes/login');
+var index_ceRouter = require('./routes/index_ce');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var dataviewRouter = require('./routes/dataview');
@@ -18,7 +20,7 @@ const username = "pasajero";
 const password = "q1w2e3r4";
 const url = `mongodb://${username}:${password}@ac-eud9deb-shard-00-00.rvjlwzm.mongodb.net:27017,ac-eud9deb-shard-00-01.rvjlwzm.mongodb.net:27017,ac-eud9deb-shard-00-02.rvjlwzm.mongodb.net:27017/?ssl=true&replicaSet=atlas-ymfgu4-shard-0&authSource=admin&retryWrites=true&w=majority`;
 
-mongoose.connect(url);
+//mongoose.connect(url);
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error: "));
@@ -38,9 +40,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
+app.use('/', loginRouter);
+app.use('/index_ce', index_ceRouter);
+app.use('/index', indexRouter);
 app.use('/users', usersRouter);
-app.use("/dataview", dataviewRouter);
+app.use('/dataview', dataviewRouter);
 app.use('/databehavior', databehaviorRouter);
 app.use('/download', downloadRouter);
 

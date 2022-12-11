@@ -1,9 +1,18 @@
 extends layout
 
 block content
+  script.
+    function gt_dataview() {
+      window.location.href = "/dataview";
+    }
+
+    function gt_databehavior() {
+      window.location.href = "/databehavior";
+    }
+
   h1="Centro de Investigación Embalse El Yeso"
   hr
-  a(href="dataview") Vista pública de datos
+  button(id="d_view", onclick="gt_dataview()") Vista pública de datos
   br
-  a(href="databehavior") Comportamiento de variables en el tiempo
-  brr
+  button(id="d_behavior", onclick="gt_databehavior()") Comportamiento de variables en el tiempo
+  br

@@ -1,0 +1,46 @@
+extends layout 
+
+block content
+    script.
+        function createLogin() {
+            const canvas = document.getElementById("canvas");
+            const form = document.createElement("form");
+
+            form.setAttribute("method", "get");
+            form.setAttribute("action", "/");
+
+            const user = document.createElement("input");
+            user.setAttribute("type", "text");
+            user.setAttribute("name", "User");
+
+            const pwd = document.createElement("input");
+            pwd.setAttribute("type", "password");
+            pwd.setAttribute("name", "Contrasena");
+
+            const sub = document.createElement("input");
+            sub.setAttribute("type", "submit");
+            sub.setAttribute("name", "Submit");
+            sub.setAttribute("value", "Consulta");
+
+            form.append(user);
+            form.append(pwd);
+            form.append(sub);
+
+            if(canvas.childNodes.length != 0) {
+                canvas.removeChild(canvas.childNodes[0]);
+            }
+            canvas.appendChild(form);
+        }
+
+        function inviteLogin() {
+            window.location.href = "/index_ce";
+        }
+
+    h1="Bienvenido al Portal"
+    h2="Login"
+    hr
+    button(id="inv_login", onclick="createLogin()") Logear como Investigador
+    button(id="ce_login", onclick="inviteLogin()") Logear como Cliente Externo
+    div(id="canvas")
+    div(id="msg")
+    p=stats
