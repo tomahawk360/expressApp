@@ -1,5 +1,5 @@
 var express = require("express");
-var conexion = require("./conexion");
+var conexion = require("../controllers/apiFetchController");
 
 var router = express.Router();
 

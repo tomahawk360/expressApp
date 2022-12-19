@@ -1,18 +1,8 @@
 var express = require('express');
-var conexion = require('./conexion');
-//var savedata = require('./savedata');
+var api_fetch_controller = require('../controllers/apiFetchController');
 
 var router = express.Router();
 
-router.get("/", (req, res, next) => {
-    let forma = req.query.formato;
-    console.log(forma);
-
-    conexion.getToken()
-        .then((tok) => conexion.getData(tok))
-        .then((data) => conexion.filterData(data))
-        .then((filt) => res.render('download', {formal: forma, datal: filt}));
- 
-});
+router.get("/", api_fetch_controller.get_data);
 
 module.exports = router;
